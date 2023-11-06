@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: build-and-push
+spec:
+  steps:
+  - name: build
+    image: gcr.io/kaniko-project/executor:latest
+    env:
+    - name: DOCKER_CONFIG
+      value: /tekton/home/.docker
+    command:
+    - /kaniko/executor
+    args:
+    - --dockerfile=/workspace/Dockerfile
+    - --context=dir:///workspace
+    - --destination=yourusername/sample-project:latest
+    volumeMounts:
+    - name: workspace
+      mountPath: /workspace
+  volumes:
+  - name: workspace
+    emptyDir: {}

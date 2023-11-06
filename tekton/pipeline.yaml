@@ -1,0 +1,16 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: build-and-push-pipeline
+spec:
+  resources:
+  - name: source
+    type: git-source
+  tasks:
+  - name: build-and-push-task
+    taskRef:
+      name: build-and-push
+    resources:
+      inputs:
+      - name: source
+        resource: source

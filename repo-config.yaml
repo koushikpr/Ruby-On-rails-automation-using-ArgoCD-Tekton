@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: repo-config
+stringData:
+  url: https://github.com/koushikpr
+  username: koushikpr
+  password: removedforsecurity

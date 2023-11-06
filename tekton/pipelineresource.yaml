@@ -1,0 +1,13 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: git-source
+spec:
+  type: git
+  params:
+  - name: revision
+    value: main
+  - name: url
+    value: https://github.com/koushikpr/Ruby-On-rails-automation-using-ArgoCD-Tekton.git
+  - name: revisionType
+    value: branch
