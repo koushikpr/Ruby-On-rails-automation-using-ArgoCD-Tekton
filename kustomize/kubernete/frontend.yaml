@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - command:
+        - yarn
+        - dev
+        image: node:14-alpine
+        name: frontend
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+        - mountPath: /myapp/frontend
+          name: frontend-storage
+        workingDir: /myapp/frontend
+      volumes:
+      - name: frontend-storage
+        persistentVolumeClaim:
+          claimName: frontend-pvc

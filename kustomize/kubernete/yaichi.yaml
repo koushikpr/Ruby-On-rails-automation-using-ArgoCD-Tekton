@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yaichi-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yaichi
+  template:
+    metadata:
+      labels:
+        app: yaichi
+    spec:
+      containers:
+      - image: mtsmfm/yaichi:1.5.0
+        name: yaichi
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-socket
+      volumes:
+      - hostPath:
+          path: /var/run/docker.sock
+        name: docker-socket
